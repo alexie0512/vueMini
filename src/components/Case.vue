@@ -27,9 +27,17 @@
               v-model="addItem.type"
               required
             ></v-select>
+            <v-file-input
+                  label="Testcase file"
+                  v-model="addItem.file"
+                  v-if="addItem.type=='File'"
+                  outlined
+                  dense
+            ></v-file-input>
             <v-textarea
               label="Testcase data"
               v-model="addItem.casedata"
+              v-if="addItem.type=='Text'"
               required
             ></v-textarea>
             <v-text-field
@@ -76,11 +84,13 @@
 
 <script>
 export default {
+
   data() {
     return {
       addItem: {
         summary: "",
         type: "",
+        file: "",
         casedata: "",
         comment: "",
       },
@@ -108,6 +118,8 @@ export default {
         }],
     };
   },
+
+  // 在页面加载完成后拿到现有数据
   created() {
     let get_params = {
       pageNum: 0,
@@ -121,16 +133,43 @@ export default {
     add() {
       this.dialog = true;
     },
+
+
+    // 点击【添加用例】按钮-保存操作逻辑
     addCases() {
-      console.log(this.addItem);
+      console.log(this.addItem)
+
+      if(this.addItem.type=='Text'){
       let post_data = {
         summary: this.addItem.summary,
-        priority: this.addItem.priority,
         casedata: this.addItem.casedata,
-      };
+        comment: this.addItem.comment
+      }
       this.$api.cases.createCasesbyText(post_data).then((res) => {
-        console.log(res), (this.dialog = false);
-      });
+        console.log(res)
+      })
+      }else if(this.addItem.type=='File'){
+        let post_data = new FormData()
+        post_data.append('summary',this.addItem.summary)
+        post_data.append('casedata',this.addItem.casedata)
+        post_data.append('caseFile',this,this.addItem.file)
+
+      this.$api.cases.createCasesbyFile(post_data).then((res)=>{
+        console.log(res)
+      }) 
+      }
+      
+      //关闭对话框
+      this.dialog=false
+
+      //重新获取用例列表
+      let get_params = {
+      pageNum: 0,
+      pageSize: 10,
+    }
+    this.$api.cases.getCases(get_params).then((res) => {
+      console.log(res), (this.desserts = res.data.data.data);
+    })
     },
   },
 };
