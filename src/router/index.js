@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '../views/Home.vue'
+//import Home from '../views/Home.vue'
 import SignIn from '../components/SignIn.vue'
 import SignUp from '../components/SignUp.vue'
 import Task from '../components/Task.vue'
@@ -10,7 +10,7 @@ import Report from '../components/Report.vue'
 
 
 
-//解决路由long yu 问题 
+//解决路由long yu问题 
 const originalPush= VueRouter.prototype.push
 
 VueRouter.prototype.push=function push(location){
@@ -36,7 +36,7 @@ const routes = [
   //   // this generates a separate chunk (about.[hash].js) for this route
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
+  // },
   {
     path:'/',
     name:'SignIn',

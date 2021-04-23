@@ -75,3 +75,36 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
  - object（对象）
 
 
+
+
+# Vue的生命周期
+- URL：https://cn.vuejs.org/v2/guide/instance.html
+- beforeCreate->created
+- beforeMount->mounted
+- beforeUpdate->updated
+- beforeDestroy->destroyed
+
+
+# 安装
+
+- 全局安装vue-cli:
+```
+npm install vue-cli -g
+vue -V
+```
+- Vue-Cli 基于webpack构建，并带有合理的默认配置。
+- 关于webpack: Webpack 是一个前端资源加载/打包工具
+              https://www.runoob.com/w3cnote/webpack-tutorial.html
+- 可视化创建项目：
+```
+vue ui
+```
+- 安装插件：
+
+
+
+
+
+
+
+

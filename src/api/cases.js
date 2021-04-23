@@ -1,8 +1,12 @@
 import axios from './http'
 
 const cases={
-    createCases(params){
-        return axios.post('/hogwartsuser/createCases', params)
+    createCasesbyText(params){
+        return axios.post('/hogwartsuser/text', params)
+    },
+
+    createCasesbyFile(params){
+        return axios.post('/hogwartsuser/file', params)
     },
 
     getCases(params){
