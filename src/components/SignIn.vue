@@ -28,10 +28,10 @@ export default {
                 pwd:this.pwd
             }
             console.log("signIN 接口")   //调试用
-            this.$api.user.signIn(post_data).then(res=>{
+            this.$api.user.signIn(post_data).then(res => {
                 console.log(res)
-                //localStorage.setItem('token',res.data.data.token) //将接口返回的token存储到本地
-                //localStorage.setItem('username',this.username) //将用户名存储到本地
+                localStorage.setItem('token',res.data.data.token) //将接口返回的token存储到本地
+                localStorage.setItem('username',this.username) //将用户名存储到本地
 
                 this.$router.push({name:'Case'})
             })

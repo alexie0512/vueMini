@@ -49,14 +49,14 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="primary" text @click="dialog = false">Cancel</v-btn>
-          <v-btn color="primary" @click="addCases()">Save</v-btn>
+          <v-btn color="primary" @click="addCase()">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
     <!-- 定义【添加用例】【生成测试任务】两个按钮 -->
     <v-btn color="primary" class="btn" @click="add()">Add TestCases</v-btn>
-    <v-btn color="success" class="btn">Generate Tasks</v-btn>
+    <v-btn color="success" class="btn">Assign Tasks</v-btn>
 
     <!-- 用例列表 -->
     <template>
@@ -136,13 +136,13 @@ export default {
 
 
     // 点击【添加用例】按钮-保存操作逻辑
-    addCases() {
+    addCase() {
       console.log(this.addItem)
 
       if(this.addItem.type=='Text'){
       let post_data = {
-        summary: this.addItem.summary,
-        casedata: this.addItem.casedata,
+        caseName: this.addItem.summary,
+        caseData: this.addItem.casedata,
         comment: this.addItem.comment
       }
       this.$api.cases.createCasesbyText(post_data).then((res) => {
@@ -150,8 +150,8 @@ export default {
       })
       }else if(this.addItem.type=='File'){
         let post_data = new FormData()
-        post_data.append('summary',this.addItem.summary)
-        post_data.append('casedata',this.addItem.casedata)
+        post_data.append('caseName',this.addItem.summary)
+        post_data.append('caseData',this.addItem.casedata)
         post_data.append('caseFile',this,this.addItem.file)
 
       this.$api.cases.createCasesbyFile(post_data).then((res)=>{

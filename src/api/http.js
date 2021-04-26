@@ -1,18 +1,23 @@
 import axios from 'axios'
 
 var instance= axios.create({
-    hearders:{
+    headers:{
         'Content-Type':'application/json'
     },
-    baseURL:'http://192.168.50.67:8080'
+    baseURL:'http://192.168.50.66:8080'
 })
 
 //request拦截器
-// instance.interceptors.request.use(config=>{
-//     if(localStorage.getItem('token')){
-//         config.hearders.common['token']=localStorage.getItem('token')
-//     }
-//     return config
-// })
+instance.interceptors.request.use(
+    config=>{
+    if(localStorage.token){ //判断是否存在token,如果存在的话，则每个http header都加上token
+        config.headers.common['token']=localStorage.token
+    }
+    return config
+},
+err=>{
+    return Promise.reject(err);
+}
+)
 
 export default instance
